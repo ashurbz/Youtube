@@ -1,11 +1,16 @@
+import Body from "./components/Body";
+import Header from "./components/Header";
+import SideBar from "./components/SideBar";
 
 
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="bg-green-400">hiiii</h1>
-    </div>
+    <>
+    <Header/>
+    <Body/>
+
+    </>
   );
 }
 
