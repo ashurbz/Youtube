@@ -10,8 +10,11 @@ const menuSlice = createSlice({
     hideMenu: (state) => {
       state.menuOpen = !state.menuOpen;
     },
+    menuHidden: (state) => {
+      state.menuOpen = false;
+    },
   },
 });
 
-export const { hideMenu } = menuSlice.actions;
+export const { hideMenu, menuHidden } = menuSlice.actions;
 export default menuSlice.reducer;

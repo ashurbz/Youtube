@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const SideBar = () => {
@@ -10,7 +11,9 @@ const SideBar = () => {
     <div className="col-span-2">
       <div className="shadow-lg">
         <ul className="p-2">
-          <li className="font-bold text-lg">Home</li>
+          <li className="font-bold text-lg">
+            <Link to="/">Home</Link>
+          </li>
           <li>Shots</li>
           <li>Originals</li>
           <li>Music</li>
@@ -24,7 +27,7 @@ const SideBar = () => {
         </ul>
         <h1 className="font-bold text-lg p-2"> Explore </h1>
         <ul className="p-1">
-          <li>Tredning</li>
+          <li>Trending</li>
           <li>Shopping</li>
           <li>Music</li>
           <li>Movie</li>
