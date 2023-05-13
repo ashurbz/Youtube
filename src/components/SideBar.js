@@ -1,8 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const SideBar = () => {
-  return (
-    <div>
+  const menuBar = useSelector((store) => {
+    return store.appSlice.menuOpen;
+  });
+
+  return !menuBar ? null : (
+    <div className="col-span-2">
       <div className="shadow-lg">
         <ul className="p-2">
           <li className="font-bold text-lg">Home</li>
