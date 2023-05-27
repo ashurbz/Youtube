@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { hideMenu } from "../utils/menuSlice";
+import useConnectivity from "../utils/useConnectivity";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -9,6 +10,7 @@ const Header = () => {
     dispatch(hideMenu());
   };
 
+  const checkConnection = useConnectivity();
   return (
     <div className="grid grid-flow-col p-5 shadow-lg">
       <div className="col-span-1 flex">
@@ -30,6 +32,7 @@ const Header = () => {
         />
         <button className="py-2 px-5 bg-gray-400 rounded-r-full">🔍</button>
       </div>
+      <div className="p-2">{checkConnection ? "✅" : "❌"}</div>
       <div className="col-span-1">
         <img className="w-12" alt="user" src="./user.png" />
       </div>
