@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { hideMenu } from "../utils/menuSlice";
 import useConnectivity from "../utils/useConnectivity";
 import { SEARCH_SUGGESTION } from "../utils/constant";
+import { cache } from "../utils/cacheSlice";
 
 const Header = () => {
   const [searchText, setSearchText] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const dispatch = useDispatch();
+
+  const searchCaches = useSelector((store) => store.searchSlice);
 
   const handleMenuClose = () => {
     dispatch(hideMenu());
@@ -22,7 +25,11 @@ const Header = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      getSearchSuggestions();
+      if (searchCaches[searchText]) {
+        setSearchSuggestions(searchCaches[searchText]);
+      } else {
+        getSearchSuggestions();
+      }
     }, 200);
 
     return () => {
@@ -35,10 +42,11 @@ const Header = () => {
     const json = await data.json();
 
     setSearchSuggestions(json[1]);
-  };
-
-  const handleOnClick = () => {
-    console.log(searchSuggestions);
+    dispatch(
+      cache({
+        [searchText]: json[1],
+      })
+    );
   };
 
   return (
@@ -64,18 +72,17 @@ const Header = () => {
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setShowSuggestions(false)}
         />
-        <button
-          onClick={handleOnClick}
-          className="py-2 px-5 bg-gray-400 rounded-r-full"
-        >
-          🔍
-        </button>
+        <button className="py-2 px-5 bg-gray-400 rounded-r-full">🔍</button>
       </div>
       {showSuggestions && (
         <div>
           <ul className="absolute bg-white p-4">
             {searchSuggestions.map((suggestion) => {
-              return <li className="p-2">{suggestion}</li>;
+              return (
+                <li key={suggestion} className="p-2">
+                  {suggestion}
+                </li>
+              );
             })}
           </ul>
         </div>
