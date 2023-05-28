@@ -1,5 +1,5 @@
 import Body from "./components/Body";
-import Header from "./components/Header";
+
 import { Provider } from "react-redux";
 import store from "./utils/store";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -15,16 +15,15 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <Header />
-        {!checkConnection ? (
-          <NoConnectionPage />
-        ) : (
-          <RouterProvider router={appRouter}>
+        <RouterProvider router={appRouter}>
+          {!checkConnection ? (
+            <NoConnectionPage />
+          ) : (
             <Outlet>
               <Body />
             </Outlet>
-          </RouterProvider>
-        )}
+          )}
+        </RouterProvider>
       </Provider>
     </>
   );
@@ -40,6 +39,7 @@ const appRouter = createBrowserRouter([
         path: "/",
         element: <MainContainer />,
       },
+
       {
         path: "watch",
         element: <WatchPage />,
