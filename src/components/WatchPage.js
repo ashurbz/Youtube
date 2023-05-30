@@ -12,14 +12,14 @@ const WatchPage = () => {
     dispatch(menuHidden());
   }, []);
 
-  const [params] = useSearchParams();
-  const searchParams = params.get("v");
+  const [searchParams] = useSearchParams();
+
   return (
     <div className="flex flex-col w-full">
       <div className="px-5 flex w-full">
         <div className="">
           <iframe
-            width="1200"
+            width="1000"
             height="600"
             src={"https://www.youtube.com/embed/" + searchParams.get("v")}
             title="YouTube video player"
