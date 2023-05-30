@@ -14,6 +14,9 @@ const SideBar = () => {
           <li className="font-bold text-lg">
             <Link to="/">Home</Link>
           </li>
+          <li>
+            <Link to="/demo">Demo</Link>
+          </li>
           <li>Shots</li>
           <li>Originals</li>
           <li>Music</li>
